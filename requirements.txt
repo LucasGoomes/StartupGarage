@@ -1,0 +1,7 @@
+langchain_community
+chromadb
+fastembed
+pypdf
+fastapi
+ollama
+uvicorn
