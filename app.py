@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 import ollama
+from fastapi.responses import FileResponse  
+from fpdf import FPDF  
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import PromptTemplate
@@ -47,7 +49,18 @@ def generate(prompt: str):
     chain = create_retrieval_chain(retriever, document_chain)
 
     response = chain.invoke({"input": prompt})
-    print(response)
+    loi_text = response["answer"]
+    pdf_path = generate_pdf(loi_text) 
+    return FileResponse(pdf_path, media_type='application/pdf', filename='generated_loi.pdf')
 
-    response_answer = {"answer": response["answer"]}
-    return response_answer
+    #response_answer = {"answer": response["answer"]}
+    #return response_answer
+
+def generate_pdf(text: str, filename: str = "generated_loi.pdf") -> str:  
+    pdf = FPDF()  
+    pdf.add_page()  
+    pdf.set_auto_page_break(auto=True, margin=15)  
+    pdf.set_font("Arial", size=12)  
+    pdf.multi_cell(0, 10, text)  
+    pdf.output(filename)  
+    return filename 

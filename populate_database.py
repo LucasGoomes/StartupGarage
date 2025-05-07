@@ -24,7 +24,7 @@ def split_documents(documents: list[Document]):
 
 def calculate_chunk_ids(chunks):
 
-    # This will create IDs like "data/monopoly.pdf:6:2"
+    # This will create IDs like "data/LOI.pdf:6:2"
     # Page Source : Page Number : Chunk Index
 
     last_page_id = None

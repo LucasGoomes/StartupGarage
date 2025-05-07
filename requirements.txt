@@ -5,3 +5,4 @@ pypdf
 fastapi
 ollama
 uvicorn
+fpdf
