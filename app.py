@@ -8,6 +8,7 @@ from langchain.prompts import PromptTemplate
 from langchain_community.llms.ollama import Ollama
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
+from PDF import PDF
 
 CHROMA_PATH = "Data/Chroma"
 RAW_PROMPT =  PromptTemplate.from_template(
@@ -57,7 +58,7 @@ def generate(prompt: str):
     #return response_answer
 
 def generate_pdf(text: str, filename: str = "generated_loi.pdf") -> str:  
-    pdf = FPDF()  
+    pdf = PDF()  
     pdf.add_page()  
     pdf.set_auto_page_break(auto=True, margin=15)  
     pdf.set_font("Arial", size=12)  
